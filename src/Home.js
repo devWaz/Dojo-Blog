@@ -9,6 +9,7 @@ const Home = () => {
 
     
     useEffect(() => {
+        setTimeout(()=>{
         fetch( 'http://localhost:8000/blogs' )
         .then(res => {
             if (!res.ok){
@@ -25,6 +26,7 @@ const Home = () => {
             setIsLoading(false)
             setErrorMessage(err.message)
         })
+    } , 1000)
     }, []);
 
     return ( 
