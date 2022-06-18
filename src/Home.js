@@ -4,28 +4,37 @@ import BlogList from "./BlogList";
 
 const Home = () => {
     const [blogs , setBlogs] = useState(null);
+    const [isLoading , setIsLoading] = useState(true);
+    const [errorMessage , setErrorMessage] = useState(null);
 
-
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);
-    };
     
     useEffect(() => {
-        fetch('http://http://localhost:8000/blogs')
-        .then(res => {return res.json();})
+        fetch( 'http://localhost:8000/blogs' )
+        .then(res => {
+            if (!res.ok){
+            throw Error("Could not fetch data for that resource");
+            }
+            return res.json();
+        })
         .then(data =>{
-            console.log(data);
+            setBlogs(data);
+            setIsLoading(false);
+            setErrorMessage(null);
+        })
+        .catch(err => {
+            setIsLoading(false)
+            setErrorMessage(err.message)
         })
     }, []);
 
     return ( 
         <div className="home">
-        <BlogList blogs={blogs} title = 'All Blogs' handleDelete ={handleDelete}/>
+        { isLoading && <div>Loading....</div> }
+        { errorMessage && <div>{ errorMessage}</div> }
+        { blogs && <BlogList blogs={blogs} title = 'All Blogs'/> }
         </div>
      );
 }
- 
 
 
 export default Home;
