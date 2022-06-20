@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-const useFetch = () => {
-    return ( 
-    const [blogs , setBlogs] = useState(null);
+const useFetch = (url) => {
+    
+    const [data , setData] = useState(null);
     const [isLoading , setIsLoading] = useState(true);
     const [errorMessage , setErrorMessage] = useState(null);
 
     useEffect(() => {
         setTimeout(()=>{
-        fetch( 'http://localhost:8000/blogs' )
+        fetch( url )
         .then(res => {
             if (!res.ok){
             throw Error("Could not fetch data for that resource");
@@ -16,7 +16,7 @@ const useFetch = () => {
             return res.json();
         })
         .then(data =>{
-            setBlogs(data);
+            setData(data);
             setIsLoading(false);
             setErrorMessage(null);
         })
@@ -25,9 +25,10 @@ const useFetch = () => {
             setErrorMessage(err.message)
         })
     } , 1000)
-    }, []);
+    }, [url]);
 
-     );
+    return {data , isLoading , errorMessage}
+    
 }
  
 export default useFetch;
