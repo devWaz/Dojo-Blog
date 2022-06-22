@@ -7,16 +7,16 @@ function App() {
 
   return (
     <Router>
-    <div className="App">
-      <Navbar/>
-      <div className='content'>
-      <Switch>
-        <Route path="/">
-        <HomePage/>
-        </Route>
-      </Switch>
+      <div className="App">
+        <Navbar/>
+        <div className='content'>
+          <Switch>
+            <Route path="/">
+              <HomePage/>
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
     </Router>
   );
 }
