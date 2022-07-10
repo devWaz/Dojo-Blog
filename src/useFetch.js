@@ -21,14 +21,13 @@ const useFetch = (url) => {
             setErrorMessage(null);
         })
         .catch(err => {
-            setIsLoading(false)
-            setErrorMessage(err.message)
+            setIsLoading(false);
+            setErrorMessage(err.message);
         })
     } , 1000)
     }, [url]);
 
     return {data , isLoading , errorMessage}
-    
 }
  
 export default useFetch;

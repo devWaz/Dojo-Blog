@@ -1,7 +1,7 @@
 
 import Navbar from './navbar'
 import HomePage from './Home' 
-import { BrowserRouter as Router , Route , Switch} from 'react-router-dom';
+import {BrowserRouter as Router , Route , Switch} from 'react-router-dom';
 
 function App() {
 
